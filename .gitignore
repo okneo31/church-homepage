@@ -1,0 +1,31 @@
+# 환경변수 / 비밀
+.env
+.env.local
+
+# 업로드 파일 (사용자 콘텐츠는 서버 데이터)
+uploads/*
+!uploads/.gitkeep
+
+# 압축 / 바이너리
+*.7z
+*.zip
+*.tar
+*.tar.gz
+*.xls
+*.xlsx
+*.pptx
+*.doc
+*.docx
+*.pdf
+
+# OS / 에디터
+Thumbs.db
+.DS_Store
+desktop.ini
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# PHP 캐시
+*.cache
