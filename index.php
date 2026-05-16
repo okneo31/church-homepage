@@ -30,6 +30,7 @@ if (isset($_POST['login_id'])) {
 // [PHP] 2. 설정값 불러오기
 $config = getSettings($pdo);
 $isAdmin = isset($_SESSION['admin']);
+$previewMode = isset($_GET['preview']) && $_GET['preview'] == '1';
 
 // 지도 좌표 (동서울소망교회)
 $mapLat = '37.5847861';
@@ -231,7 +232,7 @@ try {
     </div>
 
 
-    <?php if ($isAdmin): ?>
+    <?php if ($isAdmin && !$previewMode): ?>
     <button onclick="toggleSidebar()" class="fixed bottom-6 right-6 z-50 bg-black text-white w-16 h-16 rounded-full border-4 border-yellow-400 shadow-xl flex items-center justify-center hover:scale-110 transition group">
         <span class="text-3xl group-hover:rotate-90 transition duration-300">⚙️</span>
     </button>
@@ -427,7 +428,7 @@ try {
         }
     </script>
 
-    <?php else: ?>
+    <?php elseif (!$previewMode): ?>
     <button onclick="document.getElementById('login-modal').classList.remove('hidden')" class="fixed bottom-6 right-6 z-50 bg-gray-200 text-black w-10 h-10 rounded-full border-2 border-black flex items-center justify-center hover:bg-gray-300 opacity-50 hover:opacity-100">🔑</button>
     <div id="login-modal" class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex justify-center items-center p-4">
         <form method="POST" class="bg-white border-4 border-black w-full max-w-sm shadow-2xl p-8 text-center relative">
