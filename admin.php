@@ -15,19 +15,13 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // 초기 비밀번호 처리를 위해 간단히 구현 (실제 운영시 DB조회 권장)
-    if ($username === 'admin' && $password === '1234') { 
+    $stmt = $pdo->prepare("SELECT * FROM admins WHERE username = ?");
+    $stmt->execute([$username]);
+    $admin = $stmt->fetch();
+    if ($admin && password_verify($password, $admin['password'])) {
         $_SESSION['admin'] = true;
     } else {
-        // DB 비밀번호 확인 로직 (초기설정 이후)
-        $stmt = $pdo->prepare("SELECT * FROM admins WHERE username = ?");
-        $stmt->execute([$username]);
-        $admin = $stmt->fetch();
-        if ($admin && password_verify($password, $admin['password'])) {
-            $_SESSION['admin'] = true;
-        } else {
-            $msg = '아이디 또는 비밀번호가 틀렸습니다.';
-        }
+        $msg = '아이디 또는 비밀번호가 틀렸습니다.';
     }
 }
 
