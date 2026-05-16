@@ -4,6 +4,23 @@ include 'db.php';
 // 설정값 불러오기
 $config = getSettings($pdo);
 
+// OG 메타 헬퍼
+$scheme = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || ($_SERVER['SERVER_PORT'] ?? '') == 443) ? 'https' : 'http';
+$siteHost = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$siteOrigin = $scheme . '://' . $siteHost;
+$currentUrl = $siteOrigin . ($_SERVER['REQUEST_URI'] ?? '/');
+
+$siteName = $config['logo'] ?? '동서울소망교회';
+$ogTitle = $config['og_title'] ?? '';
+if ($ogTitle === '') $ogTitle = $siteName . ' | 소망의 노래를 함께 부르는 공동체';
+$ogDesc = $config['og_desc'] ?? '';
+if ($ogDesc === '') $ogDesc = '예배 · 설교 · 공동체 · 봉사 · 선교 — 중랑구 면목동 ' . $siteName . '입니다. 매주 주일 함께 예배드립니다.';
+
+// OG 이미지: 사용자가 admin에서 og_image 설정했으면 그것 우선, 아니면 og-image.svg
+$ogImageRaw = $config['og_image'] ?? '';
+if ($ogImageRaw === '') $ogImageRaw = 'og-image.svg';
+$ogImage = (preg_match('#^https?://#', $ogImageRaw)) ? $ogImageRaw : $siteOrigin . '/' . ltrim($ogImageRaw, '/');
+
 // 지도 좌표 (동서울소망교회)
 $mapLat = '37.5847861';
 $mapLng = '127.0820967';
@@ -32,12 +49,28 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <meta name="description" content="<?= htmlspecialchars($ogDesc) ?>">
+    <link rel="canonical" href="<?= htmlspecialchars($currentUrl) ?>">
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="<?= htmlspecialchars($config['og_title'] ?: '동서울소망교회') ?>">
-    <meta property="og:description" content="<?= htmlspecialchars($config['og_desc']) ?>">
-    <meta property="og:image" content="http://<?= $_SERVER['HTTP_HOST'] ?>/church/<?= $config['logo_img'] ?>">
-    
-    <title><?= htmlspecialchars($config['og_title']) ?></title>
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:site_name" content="<?= htmlspecialchars($siteName) ?>">
+    <meta property="og:url" content="<?= htmlspecialchars($currentUrl) ?>">
+    <meta property="og:title" content="<?= htmlspecialchars($ogTitle) ?>">
+    <meta property="og:description" content="<?= htmlspecialchars($ogDesc) ?>">
+    <meta property="og:image" content="<?= htmlspecialchars($ogImage) ?>">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="<?= htmlspecialchars($siteName) ?>">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= htmlspecialchars($ogTitle) ?>">
+    <meta name="twitter:description" content="<?= htmlspecialchars($ogDesc) ?>">
+    <meta name="twitter:image" content="<?= htmlspecialchars($ogImage) ?>">
+
+    <title><?= htmlspecialchars($ogTitle) ?></title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">

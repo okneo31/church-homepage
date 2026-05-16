@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(0,0,0,0.07)" stroke-width="1"/>
+    </pattern>
+    <style>
+      .ko { font-family: 'Noto Sans KR', 'NanumGothic', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; font-weight: 900; }
+      .en { font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; font-weight: 900; }
+    </style>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1200" height="630" fill="#facc15"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- 외곽 보더 (Swiss style) -->
+  <rect x="0" y="0" width="1200" height="20" fill="#000"/>
+  <rect x="0" y="610" width="1200" height="20" fill="#000"/>
+  <rect x="0" y="0" width="20" height="630" fill="#000"/>
+  <rect x="1180" y="0" width="20" height="630" fill="#000"/>
+
+  <!-- 좌측 검정 블럭 (장식) -->
+  <rect x="60" y="60" width="320" height="510" fill="#000"/>
+  <text x="80" y="135" class="en" font-size="20" fill="#facc15" letter-spacing="3">CHURCH</text>
+  <line x1="80" y1="150" x2="180" y2="150" stroke="#facc15" stroke-width="4"/>
+
+  <!-- 좌측 큰 영문 (장식) -->
+  <text x="80" y="280" class="en" font-size="80" fill="#facc15" letter-spacing="-3">SOMANG</text>
+  <text x="80" y="370" class="en" font-size="80" fill="#facc15" letter-spacing="-3">CHURCH</text>
+
+  <!-- 좌측 하단 작은 정보 -->
+  <text x="80" y="500" class="en" font-size="14" fill="#facc15" letter-spacing="2" opacity="0.7">EAST SEOUL</text>
+  <text x="80" y="520" class="en" font-size="14" fill="#facc15" letter-spacing="2" opacity="0.7">SOMANG CHURCH</text>
+  <line x1="80" y1="540" x2="120" y2="540" stroke="#facc15" stroke-width="3"/>
+  <text x="80" y="560" class="en" font-size="11" fill="#facc15" opacity="0.5">EST. SEOUL · KOREA</text>
+
+  <!-- 우측 한글 영역 -->
+  <text x="420" y="200" class="ko" font-size="96" fill="#000" letter-spacing="-4">동서울</text>
+  <text x="420" y="305" class="ko" font-size="96" fill="#000" letter-spacing="-4">소망교회</text>
+
+  <!-- 우측 굵은 선 + 슬로건 -->
+  <rect x="420" y="345" width="80" height="8" fill="#000"/>
+  <text x="420" y="395" class="ko" font-size="32" fill="#000" letter-spacing="-1">소망의 노래를 함께</text>
+  <text x="420" y="435" class="ko" font-size="32" fill="#000" letter-spacing="-1">부르는 공동체</text>
+
+  <!-- 우측 하단 박스 -->
+  <rect x="420" y="480" width="700" height="80" fill="#000"/>
+  <text x="445" y="528" class="ko" font-size="22" fill="#facc15" letter-spacing="-0.5">예배 · 설교 · 공동체 · 봉사 · 선교</text>
+
+  <!-- 우상단 작은 메타 -->
+  <text x="1100" y="100" class="en" font-size="14" fill="#000" text-anchor="end" letter-spacing="2">@ DONGSEOUL</text>
+  <text x="1100" y="120" class="en" font-size="11" fill="#000" text-anchor="end" opacity="0.6">SOMANG.TTL1.TOP</text>
+</svg>

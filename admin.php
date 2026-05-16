@@ -133,11 +133,22 @@ function rawval($config, $key, $default = '') {
                             <input type="file" id="input-logo-img-file" class="swiss-file flex-1" accept="image/*">
                         </div>
                         <label class="field-label">교회 이름 (로고 옆 글자)</label>
-                        <input type="text" id="input-logo" class="swiss-input mb-2" value="<?= val($config, 'logo') ?>">
-                        <label class="field-label">공유 제목 (OG Title)</label>
-                        <input type="text" id="input-og-title" class="swiss-input mb-2" value="<?= val($config, 'og_title') ?>">
-                        <label class="field-label">공유 설명 (OG Desc)</label>
-                        <input type="text" id="input-og-desc" class="swiss-input" value="<?= val($config, 'og_desc') ?>">
+                        <input type="text" id="input-logo" class="swiss-input mb-3" value="<?= val($config, 'logo') ?>">
+
+                        <div class="border-t-2 border-dashed border-gray-400 pt-3 mt-3">
+                            <p class="font-black text-xs mb-2">🔗 카카오톡/페이스북 공유 (Open Graph)</p>
+                            <label class="field-label">공유 제목 (비우면 자동 생성)</label>
+                            <input type="text" id="input-og-title" class="swiss-input mb-2" placeholder="동서울소망교회 | 소망의 노래를 함께 부르는 공동체" value="<?= val($config, 'og_title') ?>">
+                            <label class="field-label">공유 설명 (비우면 자동 생성)</label>
+                            <textarea id="input-og-desc" class="swiss-input mb-2 h-14" placeholder="예배 · 설교 · 공동체 · 봉사 · 선교 — 중랑구 면목동 동서울소망교회입니다."><?= htmlspecialchars(rawval($config, 'og_desc')) ?></textarea>
+                            <label class="field-label">공유 이미지 (1200x630 권장)</label>
+                            <div class="flex items-center gap-2 mb-1">
+                                <img id="og-image-preview" src="<?= val($config, 'og_image') ?: 'og-image.svg' ?>" class="h-12 w-24 object-cover border border-black bg-white">
+                                <input type="file" id="input-og-image-file" class="swiss-file flex-1" accept="image/*">
+                            </div>
+                            <input type="text" id="input-og-image" class="swiss-input text-xs" placeholder="비우면 og-image.svg 자동 사용" value="<?= val($config, 'og_image') ?>">
+                            <p class="text-[10px] text-gray-500 mt-1">💡 파일 업로드 또는 URL 입력. 비워두면 기본 디자인(og-image.svg)이 자동 사용됩니다.</p>
+                        </div>
                     </section>
 
                     <section class="bg-white p-4 border-4 border-black mb-4">
@@ -312,7 +323,7 @@ function rawval($config, $key, $default = '') {
             if (showNotices) formData.append('show_notices', showNotices.checked ? '1' : '0');
 
             // 파일 업로드
-            ['logo-img-file', 'hero-img-file', 'notice1-img-file'].forEach(id => {
+            ['logo-img-file', 'hero-img-file', 'notice1-img-file', 'og-image-file'].forEach(id => {
                 const fi = document.getElementById('input-' + id);
                 if (fi && fi.files[0]) {
                     formData.append(id.replace(/-/g, '_'), fi.files[0]);
@@ -332,9 +343,13 @@ function rawval($config, $key, $default = '') {
                         if (result.new_notice1_img) {
                             document.getElementById('input-notice1-img').value = result.new_notice1_img;
                         }
+                        if (result.new_og_image) {
+                            document.getElementById('input-og-image').value = result.new_og_image;
+                            document.getElementById('og-image-preview').src = result.new_og_image;
+                        }
                         reloadPreview();
                         // 파일 input 초기화
-                        ['logo-img-file', 'hero-img-file', 'notice1-img-file'].forEach(id => {
+                        ['logo-img-file', 'hero-img-file', 'notice1-img-file', 'og-image-file'].forEach(id => {
                             const fi = document.getElementById('input-' + id);
                             if (fi) fi.value = '';
                         });

@@ -68,6 +68,7 @@ try {
     $newLogo = processUpload('logo_img_file', 'logo_img', $uploadDir, $stmt);
     $newHeroImg = processUpload('hero_img_file', 'hero_img', $uploadDir, $stmt);
     $newNoticeImg = processUpload('notice1_img_file', 'notice1_img', $uploadDir, $stmt);
+    $newOgImage = processUpload('og_image_file', 'og_image', $uploadDir, $stmt);
 
     $pdo->commit();
 
@@ -75,7 +76,8 @@ try {
         'status' => 'success',
         'new_logo' => $newLogo,
         'new_hero_img' => $newHeroImg,
-        'new_notice1_img' => $newNoticeImg
+        'new_notice1_img' => $newNoticeImg,
+        'new_og_image' => $newOgImage
     ]);
 
 } catch (Exception $e) {
