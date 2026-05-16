@@ -1,0 +1,50 @@
+User-agent: *
+Allow: /
+
+# SNS / 메신저 OG 스크래퍼 명시적 허용
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Facebot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: KakaoTalk-Scrap
+Allow: /
+
+User-agent: kakaotalk-scrap
+Allow: /
+
+User-agent: Daum
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: Slackbot-LinkExpanding
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Yeti
+Allow: /
+
+Sitemap: https://somang.ttl1.top/sitemap.xml
